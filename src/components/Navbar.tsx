@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { MapPin, Menu, X, Plus, Home, ClipboardList, Bolt, Bell, MessageCircle, Settings2, Newspaper } from 'lucide-react';
+import { MapPin, Menu, X, Plus, Home, ClipboardList, Bolt, Bell, MessageCircle, Settings2, Newspaper, Users, FileText } from 'lucide-react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Badge from "@mui/material/Badge";
@@ -52,10 +52,14 @@ const Navbar = () => {
 
   if (user) {
     navLinks.push({ path: '/post', label: 'Post Item', icon: Plus });
+
+    if (user.role === "admin") {
     navLinks.push({ path: '/dashboard', label: 'Dashboard', icon: Home });
   }
+    // navLinks.push({ path: '/dashboard', label: 'Dashboard', icon: Home });
+  }
 
-  // Notifications listener
+// Notifications listener
   useEffect(() => {
     if (!user) return;
     const q = query(
@@ -66,8 +70,7 @@ const Navbar = () => {
     return onSnapshot(q, (snapshot) => setUnreadCount(snapshot.size));
   }, [user]);
 
-  // Conversations listener
-
+// Conversations listener
 useEffect(() => {
   if (!user) return;
 
@@ -245,6 +248,23 @@ useEffect(() => {
               <Link to="/manage-claims" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-cornflower-blue hover:bg-gray-100 transition-colors duration-200">
                 <ClipboardList className="w-5 h-5" /><span>Manage Claims</span>
               </Link>
+
+              <Link to="/my-posts" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-cornflower-blue hover:bg-gray-100 transition-colors duration-200">
+                <FileText  className="w-5 h-5" /><span>My Posts</span>
+              </Link>
+
+               {/* Admin-only link */}
+                {user.role === "admin" && (
+                  <Link
+                    to="/manage-users"
+                    className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-cornflower-blue hover:bg-gray-100 transition-colors duration-200"
+                  >
+                    <Users className="w-5 h-5" />
+                    <span>Manage Users</span>
+                  </Link>
+                )}
+
+
               <Link to="/settings" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-cornflower-blue hover:bg-gray-100 transition-colors duration-200">
                 <Settings2 className="w-5 h-5" /><span>Settings</span>
               </Link>

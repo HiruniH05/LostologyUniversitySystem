@@ -5,7 +5,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import { db, storage, auth } from "../firebaseConfig";
 import MapPicker from "../components/MapComponent";
-import { getCategoryFromVision } from "../vision"; // 👈 import Vision helper
+import { getCategoryFromVision } from "../vision"; //import Vision helper
 
 const PostItemPage = () => {
   const [itemType, setItemType] = useState("lost");
@@ -28,7 +28,8 @@ const PostItemPage = () => {
     "Other",
   ];
 
-  // 👇 Convert image to base64 and call Vision API
+
+  // Convert image to base64 and call Vision API
   const analyzeImage = async (file: File) => {
     const reader = new FileReader();
     reader.onloadend = async () => {

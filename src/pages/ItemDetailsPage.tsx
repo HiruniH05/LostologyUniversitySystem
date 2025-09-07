@@ -420,8 +420,6 @@ const startConversation = async () => {
                 )}
             </div>
           </div>
-
-
           </div>
         </div>
         
@@ -506,94 +504,93 @@ const startConversation = async () => {
         </div>
 
        {isOwner && (
-      <div className="bg-white rounded-xl shadow-lg p-6 mt-6">
-        <h3 className="text-lg font-semibold mb-4">Claims</h3>
-        {claims.length === 0 ? (
-          <p className="text-gray-500">No claims yet.</p>
-        ) : (
-          claims.map((claim) => (
-            <div
-              key={claim.id}
-              className="border-b py-3 flex items-center justify-between"
-            >
-              {/* Left side: message + user */}
-              <div>
-                <p className="font-medium">{claim.message}</p>
-                <p className="text-sm text-gray-600">By: {claim.userName}</p>
-              </div>
-
-              {/* Middle: status with color */}
-              <span
-                className={`px-3 py-1 rounded-full text-sm font-semibold
-                  ${
-                    claim.status === "approved"
-                      ? "bg-green-100 text-green-700"
-                      : claim.status === "rejected"
-                      ? "bg-red-100 text-red-700"
-                      : "bg-orange-100 text-orange-700"
-                  }
-                `}
+        <div className="bg-white rounded-xl shadow-lg p-6 mt-6">
+          <h3 className="text-lg font-semibold mb-4">Claims</h3>
+          {claims.length === 0 ? (
+            <p className="text-gray-500">No claims yet.</p>
+          ) : (
+            claims.map((claim) => (
+              <div
+                key={claim.id}
+                className="border-b py-3 flex items-center justify-between"
               >
-                {claim.status}
-              </span>
-
-              {/* Right side: buttons */}
-              {claim.status === "pending" && (
-                <div className="flex space-x-2 ml-4">
-                  <button
-                    onClick={() => updateClaimStatus(claim.id, "approved")}
-                    className="px-3 py-1 bg-green-600 text-white rounded"
-                  >
-                    Approve
-                  </button>
-                  <button
-                    onClick={() => updateClaimStatus(claim.id, "rejected")}
-                    className="px-3 py-1 bg-red-600 text-white rounded"
-                  >
-                    Reject
-                  </button>
+                {/* Left side: message + user */}
+                <div>
+                  <p className="font-medium">{claim.message}</p>
+                  <p className="text-sm text-gray-600">By: {claim.userName}</p>
                 </div>
-              )}
-            </div>
-          ))
-        )}
-      </div>
-    )}
+
+                {/* Middle: status with color */}
+                <span
+                  className={`px-3 py-1 rounded-full text-sm font-semibold
+                    ${
+                      claim.status === "approved"
+                        ? "bg-green-100 text-green-700"
+                        : claim.status === "rejected"
+                        ? "bg-red-100 text-red-700"
+                        : "bg-orange-100 text-orange-700"
+                    }
+                  `}
+                >
+                  {claim.status}
+                </span>
+
+                {/* Right side: buttons */}
+                {claim.status === "pending" && (
+                  <div className="flex space-x-2 ml-4">
+                    <button
+                      onClick={() => updateClaimStatus(claim.id, "approved")}
+                      className="px-3 py-1 bg-green-600 text-white rounded"
+                    >
+                      Approve
+                    </button>
+                    <button
+                      onClick={() => updateClaimStatus(claim.id, "rejected")}
+                      className="px-3 py-1 bg-red-600 text-white rounded"
+                    >
+                      Reject
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
+        </div>
+      )}
 
 
 
         {/* Similar Items */}
         <div className="mt-12 bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-xl font-semibold text-gray-900 mb-6">Similar Items</h2>
-<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-  {similarItems.length > 0
-    ? similarItems.map((sim) => (
-        <Link
-          key={sim.id}
-          to={`/item/${sim.id}`}   // ✅ navigate to item details with new ID
-          className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200 block"
-        >
-          <div className="bg-gray-200 h-32 rounded-lg mb-3">
-            <img
-              src={sim.images?.[0] || "https://via.placeholder.com/150"}
-              alt={sim.title}
-              className="w-full h-32 object-cover rounded-lg"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {similarItems.length > 0
+              ? similarItems.map((sim) => (
+                  <Link
+                    key={sim.id}
+                    to={`/item/${sim.id}`}   // ✅ navigate to item details with new ID
+                    className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow duration-200 block"
+                  >
+                    <div className="bg-gray-200 h-32 rounded-lg mb-3">
+                      <img
+                        src={sim.images?.[0] || "https://via.placeholder.com/150"}
+                        alt={sim.title}
+                        className="w-full h-32 object-cover rounded-lg"
+                      />
+                    </div>
+                    <h4 className="font-medium text-gray-900 mb-1">{sim.title}</h4>
+                    <p className="text-sm text-gray-600">
+                      {sim.category} • {sim.location}
+                    </p>
+                  </Link>
+                ))
+              : [1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="border border-gray-200 rounded-lg p-4 h-48 bg-gray-50"
+                  />
+                ))}
           </div>
-          <h4 className="font-medium text-gray-900 mb-1">{sim.title}</h4>
-          <p className="text-sm text-gray-600">
-            {sim.category} • {sim.location}
-          </p>
-        </Link>
-      ))
-    : [1, 2, 3].map((i) => (
-        <div
-          key={i}
-          className="border border-gray-200 rounded-lg p-4 h-48 bg-gray-50"
-        />
-      ))}
-</div>
-
         </div>
 
         </>

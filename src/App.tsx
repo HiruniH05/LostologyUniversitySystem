@@ -16,6 +16,8 @@ import MyClaims from './pages/MyClaims';
 import ManageClaims from './pages/ManageClaims';
 import FeedPage from './pages/FeedPage';
 import Settings from './pages/Settings';
+import ManageUsers from './pages/ManageUsers';
+import MyPosts from './pages/MyPosts';
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
           <Route path="/manage-claims" element={<ManageClaims />} />
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/manage-users" element={<ManageUsers />} />
+          <Route path="/my-posts" element={<MyPosts />} />
         </Routes>
 
          <FloatingChatButton />
