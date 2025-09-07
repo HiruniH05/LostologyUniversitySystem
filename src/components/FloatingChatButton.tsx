@@ -9,15 +9,11 @@ import { HelpCircle} from 'lucide-react';
 const faqs = [
   {
     question: 'How can I download a User Manual?',
-    answer: 'You can download the User Manual <a href="src/Assets/manual.pdf" target="_blank" rel="noopener noreferrer" style="color:blue; text-decoration:underline;">here</a>.',
+    answer: 'You can download the User Manual <a href="src/Assets/UserManual.pdf" target="_blank" rel="noopener noreferrer" style="color:blue; text-decoration:underline;">here</a>.',
   },
   {
     question: 'How do I post a lost item?',
     answer: 'Click the "+ Post Item" button on the navigation bar and fill in the item details.',
-  },
-  {
-    question: 'Can I edit my post later?',
-    answer: 'Yes, go to your dashboard and click on the item to edit it.',
   },
   {
     question: 'What if I found someone\'s item?',
@@ -25,7 +21,7 @@ const faqs = [
   },
    {
     question: 'Where can I access the dashboard?',
-    answer: 'You can access the dashboard by logging into the application or signing up if you are a new user.',
+    answer: 'You can access the dashboard by logging into the application as an admin or signing up if you are a new user.',
   },
 ];
 
